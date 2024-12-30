@@ -93,6 +93,16 @@ Usage:
       6. valid week_period range [1-12]
       7. valid month_period range [1-3]
 
+  battery charging SETTING[on/off]
+    manually set the battery to (not) charge
+    ! this action removes all daemons and schedules
+    eg: battery charging on
+
+  battery adapter SETTING[on/off]
+    manually set the adapter to (not) charge even when plugged in
+    ! this action removes all daemons and schedules
+    eg: battery adapter off
+
   battery charge LEVEL[1-100, stop]
     charge the battery to a certain percentage, and disable charging when that percentage is reached
     eg: battery charge 90
@@ -194,11 +204,11 @@ function valid_action() {
     local action=$1
     
     # List of valid actions
-    VALID_ACTIONS=("" "visudo" "maintain" "calibrate" "schedule" "charge" "discharge" 
+    VALID_ACTIONS=("" "visudo" "maintain" "calibrate" "schedule" "charging" "adapter" "charge" "discharge" 
 	"status" "dailylog" "calibratelog" "logs" "language" "update" "version" "reinstall" "uninstall" 
 	"maintain_synchronous" "status_csv" "create_daemon" "disable_daemon" "remove_daemon" "changelog")
     
-    VALID_ACTIONS_USER=("" "visudo" "maintain" "calibrate" "schedule" "charge" "discharge" 
+    VALID_ACTIONS_USER=("" "visudo" "maintain" "calibrate" "schedule" "charging" "adapter" "charge" "discharge" 
 	"status" "dailylog" "calibratelog" "logs" "language" "update" "version" "reinstall" "uninstall" "changelog")
 
     # Check if action is valid
@@ -1244,6 +1254,54 @@ if [[ "$action" == "uninstall" ]]; then
 	sudo rm -v -r "$configfolder"
 	pkill -9 -f "/usr/local/bin/battery.*"
 	exit 0
+fi
+
+# Charge on/off controller, this action will first remove all daemons and schedules
+if [[ "$action" == "charging" ]]; then
+
+	$battery_binary remove_daemon
+	$battery_binary schedule disable
+	rm $schedule_path 2>/dev/null
+	pkill -9 -f "$binfolder/battery.*"
+
+	log "Setting $action to $setting"
+	# Set charging to on and off
+	if [[ "$setting" == "on" ]]; then
+		enable_charging
+	elif [[ "$setting" == "off" ]]; then
+		disable_charging
+	else
+		log "Error: $setting is not \"on\" or \"off\"."
+		exit 1
+	fi
+
+	exit 0
+
+fi
+
+# Discharge on/off controller, this action will first remove all daemons and schedules
+if [[ "$action" == "adapter" ]]; then
+
+	$battery_binary remove_daemon
+	$battery_binary schedule disable
+	rm $schedule_path 2>/dev/null
+	pkill -9 -f "$binfolder/battery.*"
+
+	log "Setting $action to $setting"
+	# Set charging to on and off
+	if [[ "$setting" == "on" ]]; then
+		disable_discharging
+		change_magsafe_led_color "auto"
+	elif [[ "$setting" == "off" ]]; then
+		enable_discharging
+		change_magsafe_led_color "none" # LED none for discharging
+	else
+		log "Error: $setting is not \"on\" or \"off\"."
+		exit 1
+	fi
+
+	exit 0
+
 fi
 
 # Charging on/off controller
