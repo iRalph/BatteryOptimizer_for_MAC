@@ -3,19 +3,22 @@
 [BatteryOptimizer_for_MAC](https://github.com/js4jiang5/BatteryOptimizer_for_MAC) 是 [Battery APP v1.2.7](https://github.com/actuallymentor/battery) 的一個分支, 但加入新功能、增強功能、錯誤修復以及刪除令人困惑或無用的命令，如下所示
 
 ## 多語言版本
+
 - [English README](README.md)<br>
 
 ### 新功能
+
 - 支援 Apple 和 Intel CPU Macs
 - 航行模式 (sail mode)，允許電池從維持百分比航行到航行目標而無需充電
-- 定時電池校正，每月指定日（最多四日）開始自動電池校正，或每1-3個月指定一日，或每1-12週指定星期幾開始自動電池校正
+- 定時電池校正，每月指定日（最多四日）開始自動電池校正，或每 1-3 個月指定一日，或每 1-12 週指定星期幾開始自動電池校正
 - 新指令“suspend”，暫時電池維護，允許充電至 100%，並在重新連接交流電源供應器時自動恢復維護
 - 即使 MacBook 睡眠或關機時，充電限制器仍然有效
   - Intel CPU：限制為上限百分比
-  - Apple CPU：限制固定為80%
-- 新增電池每日日誌和通知 
+  - Apple CPU：限制固定為 80%
+- 新增電池每日日誌和通知
 
 ### 增強功能
+
 - 以真實的硬體充電百分比取代 macOS 電池百分比。
 - 當電池校正的每個步驟完成時發送通知
 - 開始電池校正前通知用戶打開 MacBook 螢幕，並在 MacBook 螢幕打開時立即開始電池校正
@@ -26,17 +29,20 @@
 - 新增顯示目前版本的命令
 - 當有新版本可供更新時通知用戶
 
-### [Battery APP v1.2.7](https://github.com/actuallymentor/battery) 錯誤修復 
+### [Battery APP v1.2.7](https://github.com/actuallymentor/battery) 錯誤修復
+
 - 電池校正失敗並停留在 10%
 - 由於同時充電和放電，電池健康狀況惡化
 - 啟動時啟動的電池進程的 PID 不會被存儲，因此 "battery maintain stop" 無法終止原有的 maintain
 
 ### 刪除指令
+
 - 電池轉接器開/關（令人困惑，最好不要使用）
 - 電池充電開/關（令人困惑，最好不要使用）
 - 電池保持使用電壓為依據（不實用，因為充電開始時電壓突然升高）
 
 ### 相較於 AlDente 的優點
+
 - 免費且開源
 - 極輕量，記憶體使用量只有 AlDente 的 1/20
 - 不佔 menu bar 空間
@@ -44,17 +50,19 @@
 - 日誌記錄電池狀態歷史
 
 ### 需求
+
 這是適用於 Apple 和 Intel Silicon Mac 的 CLI 工具。<br>
 請調整 MAC 系統設定如下
-1.	系統設定 > 通知 > 開啟 "在鏡像輸出或共享顯示器時允許通知"
-2.	系統設定 > 通知 > 應用程式通知 > 工序指令編寫程式 > 選擇 "提示"
+
+1. 系統設定 > 通知 > 開啟 "在鏡像輸出或共享顯示器時允許通知"
+2. 系統設定 > 通知 > 應用程式通知 > 工序指令編寫程式 > 選擇 "提示"
 
 ### 🖥 CLI 版本的安裝方法
 
 單指令安裝:
 
 ```bash
-curl -s https://raw.githubusercontent.com/js4jiang5/BatteryOptimizer_for_MAC/main/setup.sh | bash
+curl -s https://raw.githubusercontent.com/iRalph/BatteryOptimizer_for_MAC/customized/setup.sh | bash
 ```
 
 安裝過程:
@@ -66,41 +74,42 @@ curl -s https://raw.githubusercontent.com/js4jiang5/BatteryOptimizer_for_MAC/mai
 5. 安裝 `sleepwatcher` (Intel CPU Macs 不需要，會自動跳過)
 
 ### 快照
+
 - `電池狀態` <br>
-<img src="https://i.imgur.com/VHx5ytq.jpg" /> <br>
+  <img src="https://i.imgur.com/VHx5ytq.jpg" /> <br>
 
 - `電池維護充電上限 85%，下限 70%` <br>
-<img src="https://i.imgur.com/mWhaVjb.jpg" /> <br>
+  <img src="https://i.imgur.com/mWhaVjb.jpg" /> <br>
 
 - `電池校正` <br>
-<img src="https://i.imgur.com/Pj87VPN.jpg" /> <br>
+  <img src="https://i.imgur.com/Pj87VPN.jpg" /> <br>
 
 - `電池校正 螢幕上蓋未打開提醒通知` <br>
-<img src="https://i.imgur.com/4ikr641.jpg" /> <br>
+  <img src="https://i.imgur.com/4ikr641.jpg" /> <br>
 
 - `電池校正 開始通知` <br>
-<img src="https://i.imgur.com/3PMRCdU.jpg" /> <br>
+  <img src="https://i.imgur.com/3PMRCdU.jpg" /> <br>
 
 - `電池校正 結束通知` <br>
-<img src="https://i.imgur.com/foc3n0u.jpg" /> <br>
+  <img src="https://i.imgur.com/foc3n0u.jpg" /> <br>
 
 - `安排每月 12 28 日 21:30 進行電池校正` <br>
-<img src="https://i.imgur.com/QbTiWqo.jpg" /> <br>
+  <img src="https://i.imgur.com/QbTiWqo.jpg" /> <br>
 
 - `安排每兩週的週三 10:50 進行電池校正` <br>
-<img src="https://i.imgur.com/JTNpakx.jpg" /> <br>
+  <img src="https://i.imgur.com/JTNpakx.jpg" /> <br>
 
 - `電池狀態每日通知` <br>
-<img src="https://i.imgur.com/42ATyJz.jpg" /> <br>
+  <img src="https://i.imgur.com/42ATyJz.jpg" /> <br>
 
 - `顯示電池狀態日誌` <br>
-<img src="https://i.imgur.com/ETfjely.jpg" /> <br>
+  <img src="https://i.imgur.com/ETfjely.jpg" /> <br>
 
 - `有更新版通知` <br>
-<img src="https://i.imgur.com/wRw4GFl.jpg" /> <br>
+  <img src="https://i.imgur.com/wRw4GFl.jpg" /> <br>
 
 - `更新至最新版前顯示更新內容` <br>
-<img src="https://i.imgur.com/6Np1Kd8.jpg" /> <br>
+  <img src="https://i.imgur.com/6Np1Kd8.jpg" /> <br>
 
 ### 使用方法
 
@@ -177,7 +186,7 @@ Usage:
   battery language LANG[tw,us]
     eg: battery language tw  # 電池狀態與通知以中文顯示
     eg: battery language us  # 電池狀態與通知以英文顯示
-  
+
   battery update
     更新至最新版本
 
@@ -192,4 +201,5 @@ Usage:
 ```
 
 ### 後語
+
 如果您覺得這個小工具對您有幫助，[請我喝杯咖啡吧](https://buymeacoffee.com/js4jiang5) ☕ 😀.
