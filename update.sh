@@ -72,6 +72,7 @@ tempfolder=~/.battery-tmp
 binfolder=/usr/local/bin
 configfolder=$HOME/.battery
 config_file=$configfolder/config_battery
+pidfile=$configfolder/battery.pid
 batteryfolder="$tempfolder/battery"
 language_file=$configfolder/language.code
 github_link="https://raw.githubusercontent.com/iRalph/BatteryOptimizer_for_MAC/customized"
@@ -146,10 +147,12 @@ rm -rf $tempfolder
 echo "[ Final ] Removed temporary folder"
 
 echo -e "\n🎉 Battery tool updated.\n"
-
-# Restart battery maintain process
-echo -e "Restarting battery maintain.\n"
 write_config informed_version "$battery_version_new"
 
 pkill -9 -f "$binfolder/battery.*"
-battery maintain recover
+if [[ "$(echo $(cat "$pidfile" 2>/dev/null) | awk '{print $2}')" == "active" ]]; then
+	# Restart battery maintain process
+	echo -e "Restarting battery maintain.\n"
+
+	battery maintain recover
+fi
