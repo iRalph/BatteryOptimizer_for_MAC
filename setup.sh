@@ -109,7 +109,7 @@ sudo $batteryfolder/battery.sh visudo $USER
 sudo chown -R $calling_user $configfolder
 
 # Run battery maintain with default percentage 80
-echo "[ 7 ] Set default battery maintain percentage to 80%, can be changed afterwards"
+# echo "[ 7 ] Set default battery maintain percentage to 80%, can be changed afterwards"
 # Setup configuration file
 version=$(echo $(battery version))
 touch $config_file
@@ -123,7 +123,7 @@ write_config daily_last
 write_config clamshell_discharge
 write_config webhookid
 
-$binfolder/battery maintain 80 >/dev/null &
+# $binfolder/battery maintain 80 >/dev/null &
 
 # Remove tempfiles
 cd ../..
