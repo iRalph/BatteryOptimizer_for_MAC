@@ -3,9 +3,11 @@
 [BatteryOptimizer_for_Mac](https://github.com/js4jiang5/BatteryOptimizer_for_Mac) is a fork of [Battery APP v1.2.7](https://github.com/actuallymentor/battery), with new features, enhancements, bug fixes, and removal of confusing or useless commands as follows
 
 ## Other languages
+
 - [正體中文 說明](README_TW.md)<br>
 
 ### New features
+
 - support both Apple and Intel CPU Macs
 - sail mode, allowing the battery to sail from maintain percentage to sail target without charging to avoid frequent micro charging
 - scheduled calibration, starting automatic calibration on specified days per month (at most four days), or specified one day every 1-3 month, or specified weekday every 1-12 weeks
@@ -17,6 +19,7 @@
 - support macOS 26 Tahoe
 
 ### Enhancements
+
 - replace macOS battery percentage with real hardware charging percentage.
 - send notifications when each step of calibration is completed
 - notify user to open macbook lid before calibration is started, and start calibration immediately when macbook lid is open
@@ -28,16 +31,19 @@
 - notify user when new version is available to update
 
 ### Fixed bugs of [Battery APP v1.2.7](https://github.com/actuallymentor/battery)
+
 - Calibrate fail and hang at 10%
 - Battery health deteriorate due to simultaneous charge and discharge
-- PID of battery process initiated at boot-up is not stored, thus cannot be killed by "battery maintain stop" 
+- PID of battery process initiated at boot-up is not stored, thus cannot be killed by "battery maintain stop"
 
 ### Removed commands
+
 - battery adapter on/off (confusing and better not be used)
 - battery charging on/off (confusing and better not be used)
 - battery maintain using voltage (not practical because voltage boost abruptly when charging starts)
 
 ### Advantages compared to AlDente
+
 - free and open source
 - extremely light weighted - memory usage is 1/20 of AlDente
 - no icon in menu bar
@@ -56,7 +62,7 @@ Please setup your Mac system settings as follows
 One-line installation:
 
 ```bash
-curl -s https://raw.githubusercontent.com/js4jiang5/BatteryOptimizer_for_Mac/main/setup.sh | bash
+curl -s https://raw.githubusercontent.com/iRalph/BatteryOptimizer_for_MAC/customized/setup.sh | bash
 ```
 
 This will:
@@ -75,43 +81,45 @@ Ans: macOS battery percentage is 0~7% higher than real percentage. It's probably
 Ans: It usually implies that you are not login as an admistrator. 
 
 ### Snapshots
+
 - `battery status` <br>
-<img src="https://i.imgur.com/VHx5ytq.jpg" /> <br>
+  <img src="https://i.imgur.com/VHx5ytq.jpg" /> <br>
 
 - `battery charge upper limit 85% and lower limit 70%` <br>
-<img src="https://i.imgur.com/mWhaVjb.jpg" /> <br>
+  <img src="https://i.imgur.com/mWhaVjb.jpg" /> <br>
 
 - `battery calibrate` <br>
-<img src="https://i.imgur.com/Pj87VPN.jpg" /> <br>
+  <img src="https://i.imgur.com/Pj87VPN.jpg" /> <br>
 
 - `battery calibrate lid not open notification` <br>
-<img src="https://i.imgur.com/G6R5EnH.jpg" /> <br>
+  <img src="https://i.imgur.com/G6R5EnH.jpg" /> <br>
 
 - `battery calibrate start notification` <br>
-<img src="https://i.imgur.com/J2L99Uz.jpg" /> <br>
+  <img src="https://i.imgur.com/J2L99Uz.jpg" /> <br>
 
 - `battery calibrate end notification` <br>
-<img src="https://i.imgur.com/FLvcO3h.jpg" /> <br>
+  <img src="https://i.imgur.com/FLvcO3h.jpg" /> <br>
 
 - `calibration schedule on Day 12 28 at 21:30` <br>
-<img src="https://i.imgur.com/yl7HxIx.jpg" /> <br>
+  <img src="https://i.imgur.com/yl7HxIx.jpg" /> <br>
 
 - `calibration schedule on WED every 2 weeks at 10:50` <br>
-<img src="https://i.imgur.com/yXYeBB1.jpg" /> <br>
+  <img src="https://i.imgur.com/yXYeBB1.jpg" /> <br>
 
 - `daily notification` <br>
-<img src="https://i.imgur.com/UvAivHE.jpg" /> <br>
+  <img src="https://i.imgur.com/UvAivHE.jpg" /> <br>
 
 - `show daily log` <br>
-<img src="https://i.imgur.com/ETfjely.jpg" /> <br>
+  <img src="https://i.imgur.com/ETfjely.jpg" /> <br>
 
 - `new version available notification` <br>
-<img src="https://i.imgur.com/nQttVUL.jpg" /> <br>
+  <img src="https://i.imgur.com/nQttVUL.jpg" /> <br>
 
 - `show changelog before update to the latest version` <br>
-<img src="https://i.imgur.com/hlvnmMW.jpg" /> <br>
+  <img src="https://i.imgur.com/hlvnmMW.jpg" /> <br>
 
 ### Usage
+
 For help, run `battery` without parameters or `battery help`:
 
 ```
@@ -171,7 +179,7 @@ Usage:
     eg: battery discharge stop # kill running battery discharge process and stop discharging
 
   battery status
-    output battery SMC status, capacity, temperature, health, and cycle count 
+    output battery SMC status, capacity, temperature, health, and cycle count
 
   battery dailylog
     output daily log and show daily log store location
@@ -189,7 +197,7 @@ Usage:
   battery language LANG[tw,us]
     eg: battery language tw  # show status and notification in traditional Chinese if available
     eg: battery language us  # show status and notification in English
-  
+
   battery update
     update the battery utility to the latest version
 
@@ -204,4 +212,5 @@ Usage:
 ```
 
 ### Final note
+
 If you feel this tool is helpful for you, you may [buy me a coffee](https://buymeacoffee.com/js4jiang5) ☕ 😀.
