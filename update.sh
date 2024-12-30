@@ -74,23 +74,12 @@ configfolder=$HOME/.battery
 config_file=$configfolder/config_battery
 batteryfolder="$tempfolder/battery"
 language_file=$configfolder/language.code
-github_link="https://raw.githubusercontent.com/js4jiang5/BatteryOptimizer_for_MAC/main"
+github_link="https://raw.githubusercontent.com/iRalph/BatteryOptimizer_for_MAC/customized"
 mkdir -p $batteryfolder
 
 lang=$(defaults read -g AppleLocale)
 if test -f $language_file; then
 	language=$(cat "$language_file" 2>/dev/null)
-	if [[ "$language" == "tw" ]]; then
-		is_TW=true
-	else
-		is_TW=false
-	fi
-else
-	if [[ $lang =~ "zh_TW" ]]; then
-		is_TW=true
-	else
-		is_TW=false
-	fi
 fi
 
 echo -e "🔋 Starting battery update\n"
@@ -101,12 +90,12 @@ visudo_version_local=$(echo $(get_parameter "$battery_local" "BATTERY_VISUDO_VER
 
 # Write battery function as executable
 echo "[ 1 ] Downloading latest battery version"
-update_branch="main"
+update_branch="customized"
 in_zip_folder_name="BatteryOptimizer_for_MAC-$update_branch"
 batteryfolder="$tempfolder/battery"
 rm -rf $batteryfolder
 mkdir -p $batteryfolder
-curl -sSL -o $batteryfolder/repo.zip "https://github.com/js4jiang5/BatteryOptimizer_for_MAC/archive/refs/heads/$update_branch.zip"
+curl -sSL -o $batteryfolder/repo.zip "https://github.com/iRalph/BatteryOptimizer_for_MAC/archive/refs/heads/$update_branch.zip"
 unzip -qq $batteryfolder/repo.zip -d $batteryfolder
 cp -r $batteryfolder/$in_zip_folder_name/* $batteryfolder
 rm $batteryfolder/repo.zip
@@ -164,15 +153,3 @@ write_config informed_version "$battery_version_new"
 
 pkill -9 -f "$binfolder/battery.*"
 battery maintain recover
-
-empty="                                                                    "
-button_empty="${empty} Buy me a coffee ☕ ${empty}😀"
-button_empty_tw="${empty} 請我喝杯咖啡 ☕ ${empty}😀"
-if $is_TW; then
-	answer="$(osascript -e 'display dialog "'"已更新至 $battery_version_new \n\n如果您覺得這個小工具對您有幫助,點擊下方按鈕請我喝杯咖啡吧"'" buttons {"'"$button_empty_tw"'", "完成"} default button 2 with icon note with title "BatteryOptimizer for MAC"' -e 'button returned of result')"
-else
-	answer="$(osascript -e 'display dialog "'"Update to $battery_version_new completed. \n\nIf you feel this tool is helpful, click the button below and buy me a coffee."'" buttons {"'"$button_empty"'", "Finish"} default button 2 with icon note with title "BatteryOptimizer for MAC"' -e 'button returned of result')"
-fi
-if [[ $answer =~ "coffee" ]] || [[ $answer =~ "咖啡" ]]; then
-    open https://buymeacoffee.com/js4jiang5
-fi
