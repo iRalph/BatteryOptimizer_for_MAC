@@ -24,10 +24,9 @@ pid_sig=$configfolder/sig.pid
 daemon_path=$HOME/Library/LaunchAgents/battery.plist
 calibrate_pidfile=$configfolder/calibrate.pid
 schedule_path=$HOME/Library/LaunchAgents/battery_schedule.plist
-shutdown_path=$HOME/Library/LaunchAgents/battery_shutdown.plist
 daily_log=$configfolder/daily.log
 calibrate_log=$configfolder/calibrate.log
-github_link="https://raw.githubusercontent.com/js4jiang5/BatteryOptimizer_for_MAC/main"
+github_link="https://raw.githubusercontent.com/iRalph/BatteryOptimizer_for_MAC/customized"
 
 ## ###############
 ## Housekeeping
@@ -53,46 +52,46 @@ Battery CLI utility $BATTERY_CLI_VERSION
 Usage:
 
   battery maintain PERCENTAGE[10-100,stop,suspend,recover] SAILING_TARGET[5-99]
-  - PERCENTAGE is battery level upper bound above which charging is stopped
-  - SAILING_TARGET is battery level lower bound below which charging is started. default value is PERCENTAGE-5 if not specified
-	Examples:
-    battery maintain 80 50    # maintain at 80% with sailing to 50%
-	battery maintain 80    # equivalent to battery maintain 80 75
-    battery maintain stop   # kill running battery maintain process, disable daemon, and enable charging. maintain will not run after reboot
-	battery maintain suspend   # suspend running battery maintain process and enable charging. maintain is automatically resumed after AC adapter is reconnected. used for temporary charging to 100% before travel
-	battery maintain recover   # recover battery maintain process
+    - PERCENTAGE is battery level upper bound above which charging is stopped
+    - SAILING_TARGET is battery level lower bound below which charging is started. default value is PERCENTAGE-5 if not specified
+    Examples:
+      battery maintain 80 50    # maintain at 80% with sailing to 50%
+      battery maintain 80    # equivalent to battery maintain 80 75
+      battery maintain stop   # kill running battery maintain process, disable daemon, and enable charging. maintain will not run after reboot
+      battery maintain suspend   # suspend running battery maintain process and enable charging. maintain is automatically resumed after AC adapter is reconnected. used for temporary charging to 100% before travel
+      battery maintain recover   # recover battery maintain process
 
   battery calibrate 
     calibrate the battery by discharging it to 15%, then recharging it to 100%, and keeping it there for 1 hour, then discharge to maintained percentage level
-	if macbook lid is not open or AC adapter is not connected, a remind notification will be received.
-	calibration will be started automatically once macbook lid is open and AC adapter is connected
-	notification will be received when each step is completed or error occurs till the end of calibration
-	if you prefer the notifications to stay on until you dismiss it, setup notifications as follows
-		system settings > notifications > applications > Script Editor > Choose "Alerts"
-	when external monitor is used, you must setup notifications as follows in order to receive notification successfully
-		system settings > notifications > check 'Allow notifications when mirroring or sharing the display'
-	eg: battery calibrate   # start calibration
-	eg: battery calibrate stop # stop calibration and resume maintain
-	
+    if macbook lid is not open or AC adapter is not connected, a remind notification will be received.
+    calibration will be started automatically once macbook lid is open and AC adapter is connected
+    notification will be received when each step is completed or error occurs till the end of calibration
+    if you prefer the notifications to stay on until you dismiss it, setup notifications as follows
+      system settings > notifications > applications > Script Editor > Choose "Alerts"
+    when external monitor is used, you must setup notifications as follows in order to receive notification successfully
+      system settings > notifications > check 'Allow notifications when mirroring or sharing the display'
+    eg: battery calibrate   # start calibration
+    eg: battery calibrate stop # stop calibration and resume maintain
+  
   battery schedule
-	schedule periodic calibration at most 4 separate days per month, or specified weekday every 1~12 weeks, or specified one day every 1~3 month. default is one day per month on Day 1 at 9am.
-	Examples:
-	battery schedule    # calibrate on Day 1 at 9am
-	battery schedule day 1 8 15 22    # calibrate on Day 1, 8, 15, 22 at 9am.
-	battery schedule day 3 18 hour 13    # calibrate on Day 3, 18 at 13:00
-	battery schedule day 6 16 26 hour 18 minute 30    # calibrate on Day 6, 16, 26 at 18:30
-    battery schedule weekday 0 week_period 2 hour 21 minute 30 # calibrate on Sunday every 2 weeks at 21:30
-	battery schedule day 5 month_period 3 hour 21 minute 30 # calibrate every 3 month on Day 5 at 21:00
-    battery schedule disable    # disable periodic calibration
-	battery schedule enable    # enable periodic calibration
-	Restrictions:
-		1. at most 4 days per month are allowed
-		2. valid day range [1-28]
-		3. valid hour range [0-23]
-		4. valid minute range [0-59]
-    	5. valid weekday range [0-6] 0:Sunday, 1:Monday, ...
-    	6. valid week_period range [1-12]
-		7. valid month_period range [1-3]
+    schedule periodic calibration at most 4 separate days per month, or specified weekday every 1~12 weeks, or specified one day every 1~3 month. default is one day per month on Day 1 at 9am.
+    Examples:
+      battery schedule    # calibrate on Day 1 at 9am
+      battery schedule day 1 8 15 22    # calibrate on Day 1, 8, 15, 22 at 9am.
+      battery schedule day 3 18 hour 13    # calibrate on Day 3, 18 at 13:00
+      battery schedule day 6 16 26 hour 18 minute 30    # calibrate on Day 6, 16, 26 at 18:30
+      battery schedule weekday 0 week_period 2 hour 21 minute 30 # calibrate on Sunday every 2 weeks at 21:30
+      battery schedule day 5 month_period 3 hour 21 minute 30 # calibrate every 3 month on Day 5 at 21:00
+      battery schedule disable    # disable periodic calibration
+      battery schedule enable    # enable periodic calibration
+    Restrictions:
+      1. at most 4 days per month are allowed
+      2. valid day range [1-28]
+      3. valid hour range [0-23]
+      4. valid minute range [0-59]
+      5. valid weekday range [0-6] 0:Sunday, 1:Monday, ...
+      6. valid week_period range [1-12]
+      7. valid month_period range [1-3]
 
   battery charge LEVEL[1-100, stop]
     charge the battery to a certain percentage, and disable charging when that percentage is reached
@@ -111,24 +110,24 @@ Usage:
     output daily log and show daily log store location
 
   battery changelog
-	show the changelog of the latest version on Github
+    show the changelog of the latest version on Github
 
   battery calibratelog
-	show calibrate history
+    show calibrate history
 
   battery logs LINES[integer, optional]
     output logs of the battery CLI and GUI
-	eg: battery logs 100
+    eg: battery logs 100
 
   battery language LANG[tw,us]
     eg: battery language tw  # show status and notification in traditional Chinese if available
-	eg: battery language us  # show status and notification in English
+    eg: battery language us  # show status and notification in English
 
   battery update
     update the battery utility to the latest version
 
   battery version
-	show current version
+    show current version
 
   battery reinstall
     reinstall the battery utility to the latest version (reruns the installation script)
@@ -1182,9 +1181,9 @@ if [[ "$action" == "update" ]]; then
 	# fetch latest battery.sh
 
 	if [[ "$setting" == "beta" ]]; then
-		github_link="https://raw.githubusercontent.com/js4jiang5/BatteryOptimizer_for_MAC/refs/heads/$subsetting"
+		github_link="https://raw.githubusercontent.com/iRalph/BatteryOptimizer_for_MAC/refs/heads/$subsetting"
 	else
-		github_link="https://raw.githubusercontent.com/js4jiang5/BatteryOptimizer_for_MAC/main"
+		github_link="https://raw.githubusercontent.com/iRalph/BatteryOptimizer_for_MAC/customized"
 	fi
 	battery_new=$(echo $(curl -sSL "$github_link/battery.sh"))
 	battery_new_version=$(echo $(get_parameter "$battery_new" "BATTERY_CLI_VERSION") | tr -d \")
@@ -1241,10 +1240,8 @@ if [[ "$action" == "uninstall" ]]; then
 	$battery_binary remove_daemon
 	$battery_binary schedule disable
 	rm $schedule_path 2>/dev/null
-	rm $shutdown_path 2>/dev/null
-	sudo rm -v "$binfolder/smc" "$binfolder/battery" $visudo_file "$binfolder/shutdown.sh"
+	sudo rm -v "$binfolder/smc" "$binfolder/battery" $visudo_file
 	sudo rm -v -r "$configfolder"
-	sudo rm -rf $HOME/.sleep $HOME/.wakeup $HOME/.shutdown $HOME/.reboot 
 	pkill -9 -f "/usr/local/bin/battery.*"
 	exit 0
 fi
@@ -2772,9 +2769,6 @@ if [[ "$action" == "logs" ]]; then
 
 	echo -e "👾 Battery CLI logs:\n"
 	tail -n $amount $logfile
-
-	echo -e "\n🖥️	Battery GUI logs:\n"
-	tail -n $amount "$configfolder/gui.log"
 
 	echo -e "\n📁 Config folder details:\n"
 	ls -lah $configfolder
