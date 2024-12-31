@@ -103,6 +103,10 @@ Usage:
     ! this action removes all daemons and schedules
     eg: battery adapter off
 
+  battery color COLOR[auto/green/orange/none]
+    manually set the Magsafe LED color
+    eg: battery color green
+
   battery charge LEVEL[1-100, stop]
     charge the battery to a certain percentage, and disable charging when that percentage is reached
     eg: battery charge 90
@@ -204,11 +208,11 @@ function valid_action() {
     local action=$1
     
     # List of valid actions
-    VALID_ACTIONS=("" "visudo" "maintain" "calibrate" "schedule" "charging" "adapter" "charge" "discharge" 
+    VALID_ACTIONS=("" "visudo" "maintain" "calibrate" "schedule" "charging" "adapter" "color" "charge" "discharge" 
 	"status" "dailylog" "calibratelog" "logs" "language" "update" "version" "reinstall" "uninstall" 
 	"maintain_synchronous" "status_csv" "create_daemon" "disable_daemon" "remove_daemon" "changelog")
     
-    VALID_ACTIONS_USER=("" "visudo" "maintain" "calibrate" "schedule" "charging" "adapter" "charge" "discharge" 
+    VALID_ACTIONS_USER=("" "visudo" "maintain" "calibrate" "schedule" "charging" "adapter" "color" "charge" "discharge" 
 	"status" "dailylog" "calibratelog" "logs" "language" "update" "version" "reinstall" "uninstall" "changelog")
 
     # Check if action is valid
@@ -1302,6 +1306,16 @@ if [[ "$action" == "adapter" ]]; then
 
 	exit 0
 
+fi
+
+# Set the Magsafe LED color
+if [[ "$action" == "color" ]]; then
+	if [[ "$2" == "auto" ]] || [[ "$2" == "green" ]] || [[ "$2" == "orange" ]] || [[ "$2" == "none" ]]; then
+		change_magsafe_led_color "$2"
+	else
+		log "Specified color is not recognized. Only [auto, green, orange, none] are allowed"
+	fi
+	exit 0
 fi
 
 # Charging on/off controller
