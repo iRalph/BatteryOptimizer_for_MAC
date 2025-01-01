@@ -525,7 +525,7 @@ function show_schedule() {
 				log "$schedule_txt"
 				log "Next calibration date is `date -j -f "%s" "$(echo $(check_next_calibration_date) | awk '{print $NF}')" +%Y/%m/%d`"
 			fi
-		else
+		elif [[ "$1" != "SilentIfEmpty" ]]; then
 			if $is_TW; then
 				log "您尚未設定電池自動校正時程"
 			else
@@ -540,7 +540,7 @@ function show_schedule() {
 				log "Your calibration schedule is disabled. Enable it by"
 			fi
 			log "battery schedule enable"
-		else
+		elif [[ "$1" != "SilentIfEmpty" ]]; then
 			if $is_TW; then
 				log "您尚未設定電池自動校正時程"
 			else
@@ -2389,15 +2389,9 @@ if [[ "$action" == "status" ]]; then
 				fi
 			fi
 		fi
-	else
-		if $is_TW; then
-			log "電池最佳化已經停止運作"
-		else
-			log "Battery maintain is not running"
-		fi
 	fi
 	
-	show_schedule
+	show_schedule "SilentIfEmpty"
 
 	echo
 	exit 0
