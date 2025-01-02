@@ -668,6 +668,10 @@ function disable_discharging() {
 # Re:charging, Aldente uses CH0B https://github.com/davidwernhart/AlDente/blob/0abfeafbd2232d16116c0fe5a6fbd0acb6f9826b/AlDente/Helper.swift#L227
 # but @joelucid uses CH0C https://github.com/davidwernhart/AlDente/issues/52#issuecomment-1019933570
 # so I'm using both since with only CH0B I noticed sometimes during sleep it does trigger charging
+# Difference:
+# https://github.com/AsahiLinux/linux/blob/asahi-6.0-rc6-1/drivers/power/supply/macsmc_power.c#L154-L158
+# * CH0I/CH0C are "hard" controls that will allow the battery to run down to 0.
+# * CH0K/CH0B are "soft" controls that are reset to 0 when SOC drops below 50%;
 function enable_charging() {
 	disable_discharging
 	log "🔌🔋 Enabling battery charging"
